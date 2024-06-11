@@ -9,7 +9,7 @@ function delay(ms: number) {
  * Don't load JupyterLab webpage before running the tests.
  * This is required to ensure we capture all log messages.
  */
-test.use({ autoGoto: false });
+test.use({ autoGoto: false, viewport: { width: 1200, height: 1600 } });
 test('should emit an activation console message', async ({ page }) => {
   const logs: string[] = [];
 
@@ -148,7 +148,7 @@ test('should work unfreeze below in section button and unfreeze below all button
 
   // freeze all cells
   for(let idx of allCellIndexes) {
-    page.notebook.selectCells(idx, idx);
+    await page.notebook.selectCells(idx, idx);
     await delay(100);
     await page.locator('.run-through-toolbar-button__freeze').click();
   }
@@ -181,7 +181,7 @@ test('should work unfreeze below in section button and unfreeze below all button
 
   // freeze all cells
   for(let idx of allCellIndexes) {
-    page.notebook.selectCells(idx, idx);
+    await page.notebook.selectCells(idx, idx);
     await delay(100);
     await page.locator('.run-through-toolbar-button__freeze').click();
   }
